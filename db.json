@@ -1,3 +1,32 @@
 {
-  "products": []
+  "products": [
+    {
+      "title": "IPhone 13 Pro Max",
+      "price": 1300,
+      "description": "Cosmic Grey",
+      "image": "https://www.notebookcheck-ru.com/fileadmin/_processed_/d/2/csm_IMG_0056_e2f3393690.jpg",
+      "id": 4
+    },
+    {
+      "title": "IPhone 13Pro Max",
+      "price": 1300,
+      "description": "Silver",
+      "image": "https://softech.kg/image/cache/46148fda07614998a56cbb35a0ca760c.png",
+      "id": 5
+    },
+    {
+      "title": "IPhone 13Pro Max",
+      "price": 1250,
+      "description": "Gold",
+      "image": "https://p.turbosquid.com/ts-thumb/4B/wZis2t/g8/gold01/jpg/1632079465/600x600/fit_q87/e9d5809d41e8041a8ed1e17569b1f57eb86ee8a2/gold01.jpg",
+      "id": 6
+    },
+    {
+      "title": "IPhone 13Pro Max",
+      "price": 1300,
+      "description": "Green",
+      "image": "https://login.kg/image/cache/catalog/new/Phones/Apple/IPhone%2013/Pro/4-500x500.jpg",
+      "id": 7
+    }
+  ]
 }
