@@ -1,19 +1,22 @@
 import React, { useReducer } from "react";
 import axios from "axios";
-import { defaultListboxReducer } from "@mui/base";
-import { DialerSipOutlined } from "@mui/icons-material";
 
 export const productsContext = React.createContext();
 
 const INIT_STATE = {
   products: [],
   oneProduct: null,
+  pages: 0,
 };
 
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
     case "GET_PRODUCTS":
-      return { ...state, products: action.payload };
+      return {
+        ...state,
+        products: action.payload.data,
+        pages: Math.ceil(action.payload.headers["x-total-count"] / 2),
+      };
     case "GET_ONE":
       return { ...state, oneProduct: action.payload };
     default:
@@ -23,12 +26,9 @@ function reducer(state = INIT_STATE, action) {
 
 const PRODUCTS_API = " http://localhost:8002/products";
 
-// const ProductsContextProvider = {{children}} => {
-
-// }
-
 const ProductsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  // console.log(state);
 
   //! Create
   async function createProduct(newProduct) {
@@ -37,10 +37,13 @@ const ProductsContextProvider = ({ children }) => {
 
   //! Read
   async function getProducts() {
-    const res = await axios(PRODUCTS_API);
+    const res = await axios(`${PRODUCTS_API}${window.location.search}`);
+    // console.log(res);
+    // console.log(res.headers["x-total-count"] / 2);
+    // console.log(Math.ceil(res.headers["x-total-count"] / 2));
     dispatch({
       type: "GET_PRODUCTS",
-      payload: res.data,
+      payload: res,
     });
   }
 
@@ -50,7 +53,7 @@ const ProductsContextProvider = ({ children }) => {
     getProducts();
   }
 
-  //! Details
+  //! Details, Get to edit
   async function getOneProduct(id) {
     const res = await axios(`${PRODUCTS_API}/${id}`);
     dispatch({
@@ -59,15 +62,22 @@ const ProductsContextProvider = ({ children }) => {
     });
   }
 
+  //! Update
+  async function updateProduct(id, editedProduct) {
+    await axios.patch(`${PRODUCTS_API}/${id}`, editedProduct);
+  }
+
   return (
     <productsContext.Provider
       value={{
         products: state.products,
         oneProduct: state.oneProduct,
+        pages: state.pages,
         createProduct,
         getProducts,
         deleteProduct,
         getOneProduct,
+        updateProduct,
       }}>
       {children}
     </productsContext.Provider>

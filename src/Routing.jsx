@@ -4,6 +4,7 @@ import AddProduct from "./components/AddProduct/AddProduct";
 import Details from "./components/Details/Details";
 import EditProduct from "./components/EditProduct/EditProduct";
 import ProductsList from "./components/ProductsList/ProductsList";
+// import Cart from "./components/Cart";
 
 const Routing = () => {
   return (
@@ -12,6 +13,7 @@ const Routing = () => {
       <Route path="/add-product" element={<AddProduct />} />
       <Route path="/edit/:id" element={<EditProduct />} />
       <Route path="/details/:id" element={<Details />} />
+      {/* <Route path="/cart" element={<Cart />} /> */}
     </Routes>
   );
 };

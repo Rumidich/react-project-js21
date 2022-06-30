@@ -68,7 +68,7 @@ const AddProduct = () => {
           value={image}
           onChange={e => setImage(e.target.value)}
         />
-        <Button onClick={handleSave} variant="contained" color="warning">
+        <Button onClick={handleSave} variant="contained" color="secondary">
           Save
         </Button>
       </Box>
