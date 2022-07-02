@@ -14,12 +14,19 @@ import MenuItem from "@mui/material/MenuItem";
 import { useLocation, useNavigate } from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-// const pages = ["Products", "Add Product"];
+import { Badge } from "@mui/material";
+import { cartContext } from "../../contexts/cartContext";
+
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { getCart, count } = React.useContext(cartContext);
+  React.useEffect(() => {
+    getCart();
+  }, []);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -111,7 +118,6 @@ const Header = () => {
               </MenuItem>
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
 
           <Typography
             variant="h5"
@@ -128,7 +134,11 @@ const Header = () => {
               color: "inherit",
               textDecoration: "none",
             }}>
-            LOGO
+            <img
+              src="http://pngwebicons.com/uploads/apple/ico/apple_icon4517.ico"
+              width="70px"
+              height="70px"
+            />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
@@ -159,12 +169,17 @@ const Header = () => {
               onClick={() => navigate("/cart")}
               color="success"
               aria-label="add to shopping cart">
-              <AddShoppingCartIcon />
+              <Badge badgeContent={count} color="error">
+                <AddShoppingCartIcon />
+              </Badge>
             </IconButton>
 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://i.pinimg.com/originals/ce/be/d6/cebed658b706fe7181a69a773cd72272.jpg"
+                />
               </IconButton>
             </Tooltip>
             <Menu

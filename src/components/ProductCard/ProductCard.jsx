@@ -15,6 +15,7 @@ export default function ProductCard({ item }) {
   const { deleteProduct } = React.useContext(productsContext);
   const { addToCart } = React.useContext(cartContext);
   const navigate = useNavigate();
+
   return (
     <Card sx={{ maxWidth: 345, margin: "10px" }}>
       <CardMedia
